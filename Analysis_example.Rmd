@@ -1,0 +1,43 @@
+---
+title: "Day1_analysis_example"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+```
+
+# Introduction 
+
+## read in data
+The data were downloaded from the [Arctic Data Center] (https://doi.org/10.18739/A25T3FZ8X)
+
+```{r message=FALSE, warning=FALSE}
+
+bg_chem<- read_csv("./data/BGchem2008data.csv")
+```
+# Analysis Plan 
+
+## calculate summary statistics
+
+```{r}
+summary(bg_chem)
+N<-mean(bg_chem$NH4)+mean(bg_chem$NO2)+mean(bg_chem$NO3)
+P<-mean(bg_chem$P)
+
+```
+## calculate mean Redfield ratio
+Redfield ratio is the ratio  of carbon to nitrogen to phosphorus
+```{r}
+ratio<-N/P
+
+```
+the Redfield ratio is approximately `r ratio`
+
+
+## plot Redfield ratio
+```{r, echo=FALSE}
+plot(bg_chem$P, bg_chem$NH4+bg_chem$NO2+bg_chem$NO3)
+```
+
